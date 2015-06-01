@@ -395,8 +395,16 @@
 }
 - (void)loadImage
 {
-  NSData * imageData = [NSData dataWithContentsOfURL:_URL];
-  UIImage * image = [UIImage imageWithData:imageData scale:_properties.scale];
+  NSData * imageData = _data;
+  
+  if (!imageData && _URL) {
+    imageData = [NSData dataWithContentsOfURL:_URL];
+  }
+  
+  UIImage * image = [UIImage imageWithData:imageData];
+  if (image) {
+    image = [UIImage imageWithCGImage:[image CGImage] scale:_properties.scale orientation:_properties.orientation];
+  }
   _image = image;
 }
 
