@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'NgImageFileIO'
-  spec.version      = '1.2'
+  spec.version      = '1.2.1'
   spec.summary      = 'Simple objective-c ImageIO wrapper for iOS and Mac.'
   spec.homepage     = 'https://github.com/meiwin/NgImageFileIO'
   spec.author       = { 'Meiwin Fu' => 'meiwin@blockthirty.com' }

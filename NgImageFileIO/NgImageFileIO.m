@@ -482,6 +482,9 @@ extern int UIImageOrientationToCGImageOrientation(UIImageOrientation uiimageOrie
   
   NSMutableDictionary *destOptions = [NSMutableDictionary dictionaryWithObject:@(MIN(1.f, quality)) forKey:(NSString *)kCGImageDestinationLossyCompressionQuality];
   if (info) [destOptions addEntriesFromDictionary:info];
+  if (!destOptions[(__bridge NSString *)kCGImagePropertyOrientation]) {
+    destOptions[(__bridge NSString *)kCGImagePropertyOrientation] = @(UIImageOrientationToCGImageOrientation(image.imageOrientation));
+  }
   CGImageDestinationAddImage(imageDestRef, image.CGImage, (__bridge CFDictionaryRef)destOptions);
   CGImageDestinationFinalize(imageDestRef);
   CFRelease(imageDestRef);
