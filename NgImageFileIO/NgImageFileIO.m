@@ -10,6 +10,87 @@
 #import <ImageIO/ImageIO.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
+extern UIImageOrientation CGImageOrientationToUIImageOrientation(int cgimageOrientation) {
+
+  UIImageOrientation o = UIImageOrientationUp;
+  switch (cgimageOrientation) {
+    case 1:
+      o = UIImageOrientationUp;
+      break;
+      
+    case 3:
+      o = UIImageOrientationDown;
+      break;
+      
+    case 8:
+      o = UIImageOrientationLeft;
+      break;
+      
+    case 6:
+      o = UIImageOrientationRight;
+      break;
+      
+    case 2:
+      o = UIImageOrientationUpMirrored;
+      break;
+      
+    case 4:
+      o = UIImageOrientationDownMirrored;
+      break;
+      
+    case 5:
+      o = UIImageOrientationLeftMirrored;
+      break;
+      
+    case 7:
+      o = UIImageOrientationRightMirrored;
+      break;
+    default:
+      break;
+  }
+  return o;
+}
+
+extern int UIImageOrientationToCGImageOrientation(UIImageOrientation uiimageOrientation) {
+  int exifOrientation = 6;
+  switch (uiimageOrientation) {
+    case UIImageOrientationUp:
+      exifOrientation = 1;
+      break;
+      
+    case UIImageOrientationDown:
+      exifOrientation = 3;
+      break;
+      
+    case UIImageOrientationLeft:
+      exifOrientation = 8;
+      break;
+      
+    case UIImageOrientationRight:
+      exifOrientation = 6;
+      break;
+      
+    case UIImageOrientationUpMirrored:
+      exifOrientation = 2;
+      break;
+      
+    case UIImageOrientationDownMirrored:
+      exifOrientation = 4;
+      break;
+      
+    case UIImageOrientationLeftMirrored:
+      exifOrientation = 5;
+      break;
+      
+    case UIImageOrientationRightMirrored:
+      exifOrientation = 7;
+      break;
+    default:
+      break;
+  }
+  return exifOrientation;
+}
+
 #pragma mark - 
 @implementation NgImageProperties
 - (instancetype)initWithScale:(CGFloat)scale
@@ -58,7 +139,7 @@
 {
   [self setColorModel:dic[(NSString *)kCGImagePropertyColorModel]];
   [self setDepth:[dic[(NSString *)kCGImagePropertyDepth] floatValue]];
-  [self setOrientation:[self exifOrientationToiOSOrientation:[dic[(NSString *)kCGImagePropertyOrientation] intValue]]];
+  [self setOrientation:CGImageOrientationToUIImageOrientation([dic[(NSString *)kCGImagePropertyOrientation] intValue])];
   
   CGSize DPI;
   DPI.height = [dic[(NSString *)kCGImagePropertyDPIHeight] floatValue];
@@ -73,46 +154,6 @@
 - (void)setFramesCount:(NSInteger)framesCount
 {
   _framesCount = framesCount;
-}
-- (UIImageOrientation)exifOrientationToiOSOrientation:(int)exifOrientation
-{
-  UIImageOrientation o = UIImageOrientationUp;
-  switch (exifOrientation) {
-    case 1:
-      o = UIImageOrientationUp;
-      break;
-      
-    case 3:
-      o = UIImageOrientationDown;
-      break;
-      
-    case 8:
-      o = UIImageOrientationLeft;
-      break;
-      
-    case 6:
-      o = UIImageOrientationRight;
-      break;
-      
-    case 2:
-      o = UIImageOrientationUpMirrored;
-      break;
-      
-    case 4:
-      o = UIImageOrientationDownMirrored;
-      break;
-      
-    case 5:
-      o = UIImageOrientationLeftMirrored;
-      break;
-      
-    case 7:
-      o = UIImageOrientationRightMirrored;
-      break;
-    default:
-      break;
-  }
-  return o;
 }
 @end
 

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern UIImageOrientation CGImageOrientationToUIImageOrientation(int exifOrientation);
+extern int UIImageOrientationToCGImageOrientation(UIImageOrientation cgImageOrientation);
+
 @interface NgImageProperties : NSObject
 @property (nonatomic, strong, readonly) NSString * UTI;
 @property (nonatomic, strong, readonly) NSString * colorModel;
