@@ -6,7 +6,7 @@ Simple objective-c ImageIO wrapper for iOS and Mac.
 
 ## Adding to your project
 
-If you are using Cocoapods, add to your Podfile:
+If you are using CocoaPods, add to your Podfile:
 
 ```ruby
 pod NgImageFileIO
